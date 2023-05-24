@@ -40,6 +40,15 @@ class MovieNotesController
             tags
         });
     }
+
+    async delete(request, response)
+    {
+        const {id} = request.params;
+
+        await knexConnection("movie_notes").where({id}).delete();
+
+        return response.json();
+    }
 }
 
 module.exports = MovieNotesController;
