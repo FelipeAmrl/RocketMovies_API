@@ -27,6 +27,19 @@ class MovieNotesController
 
         return response.json();
     }
+
+    async show(request, response)
+    {
+        const { id } = request.params;
+
+        const movieNote = await knexConnection("movie_notes").where({id}).first();
+        const tags = await knexConnection("movie_tags").where({note_id: id}).orderBy("name");
+
+        return response.json({
+            ...movieNote,
+            tags
+        });
+    }
 }
 
 module.exports = MovieNotesController;
