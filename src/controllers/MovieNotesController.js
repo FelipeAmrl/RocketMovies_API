@@ -24,6 +24,8 @@ class MovieNotesController
         });
 
         await knexConnection("movie_tags").insert(tagsInsert);
+
+        return response.json();
     }
 }
 
